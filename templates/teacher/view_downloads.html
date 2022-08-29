@@ -1,0 +1,46 @@
+{% include 'teacher/header.html' %}
+    <title>Downloads</title>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<div class="page-holder w-100 d-flex flex-wrap">
+        <div class="container-fluid px-xl-5">
+          <section class="py-5">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="h6 text-uppercase mb-0">Downloads</h3>
+                  </div>
+                  <div class="row">
+                  {% for row in downloads %}
+                  <div class="col-lg-3" align="center">
+                    <a href="../../static/downloads/{{ row['file'] }}" target="_blank" download><img src="../static/admin/downloading-png-files-3.png" style="height:60%;width:50%;"></a>
+                        <p>{{ row['note'] }}<p>
+                  </div>
+              {% endfor %}
+              </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+<script type="text/javascript">
+
+  var password = document.getElementById("password")
+  , confirm_password = document.getElementById("repassword");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords miss matched");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+
+          $(".custom-file-input").on("change", function() {
+  var fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+  });
+</script>
+{% include 'teacher/footer.html' %}

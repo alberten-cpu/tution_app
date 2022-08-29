@@ -1,0 +1,87 @@
+{% include 'area_manager/header.html' %}
+    <title>Profile</title>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<div class="page-holder w-100 d-flex flex-wrap">
+        <div class="container-fluid px-xl-5">
+          <section class="py-5">
+            <div class="row">
+              <div class="col-lg-8 mb-5" style="margin: auto">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="h6 text-uppercase mb-0">Profile</h3>
+                  </div>
+                  <div class="card-body">
+                    <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                      <div class="form-group row">
+                        <div class="col-md-12" align="center">
+                        <img src="../../static/AreaManagerImages/{{area_manager['photo']}}" alt="{{area_manager['name']}}" style="width: 200px;height: 200px" class="img-fluid rounded-circle shadow">
+                     </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-md-3 form-control-label">Name*</label>
+                        <div class="col-md-9">
+                          <input type="text" class="form-control" name="name" id="name" required value="{{area_manager['name']}}">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-md-3 form-control-label">Gender*</label>
+                        <div class="col-md-9">
+                          <select name="gender" required class="form-control">
+                            {% if area_manager['gender']=="Male" %}
+                            <option value="Male" selected>Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                            {% elif area_manager['gender']=="Female" %}
+                            <option value="Male">Male</option>
+                            <option value="Female" selected>Female</option>
+                            <option value="Other">Other</option>
+                            {% elif area_manager['gender']=="Other" %}
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other" selected>Other</option>
+                            {% endif %}
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-md-3 form-control-label">Mobile*</label>
+                        <div class="col-md-9">
+                          <input type="text" class="form-control" name="mobile" id="mobile" required value="{{area_manager['phone']}}">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-md-3 form-control-label">Email*</label>
+                        <div class="col-md-9">
+                          <input type="email" class="form-control" name="email" id="email" required value="{{area_manager['email']}}">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-md-3 form-control-label">Photo</label>
+                        <div class="col-md-9">
+                         <input type="file" class="custom-file-input" accept="image/*" name="photo" id="photo">
+                        <label class="custom-file-label" for="customFile" style="border-radius: 2rem;">Upload image</label>
+                        <small class="form-text text-muted ml-3">You can upload new photo otherwise old is remain</small>
+                        </div>
+                      </div>
+                      <div class="line"></div>
+                      <div class="form-group row">
+                        <div class="col-md-12" align="right">
+                          <button type="submit" class="btn btn-primary">Save Changes</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+<script type="text/javascript">
+
+  $(".custom-file-input").on("change", function() {
+  var fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+  });
+
+</script>
+{% include 'area_manager/footer.html' %}

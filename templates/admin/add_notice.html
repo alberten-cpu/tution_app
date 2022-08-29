@@ -1,0 +1,36 @@
+{% include 'admin/header.html' %}
+<title>Notice</title>
+ <div class="page-holder w-100 d-flex flex-wrap">
+        <div class="container-fluid px-xl-5">
+          <section class="py-5">
+            <div class="row">
+            <div class="col-lg-8 mb-5" style="margin: auto;">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="h6 text-uppercase mb-0">Add Notice</h3>
+                  </div>
+                  <div class="card-body">
+                    <form action="/addnoticeaction" method="post" enctype="multipart/form-data">
+                      <div class="form-group">
+                        <label class="form-control-label text-uppercase">Title*</label>
+                        <input type="text" name="title" id="title" required class="form-control">
+                      </div>
+                      <div class="form-group">       
+                        <label class="form-control-label text-uppercase">Date*</label>
+                        <input type="date" name="date" id="date" required class="form-control" max="{{today}}">
+                      </div>
+                      <div class="form-group">
+                        <label class="form-control-label text-uppercase">Notice</label>
+                        <textarea  name="notice" id="notice" required class="form-control" ></textarea>
+                      </div>
+                      <div class="form-group">       
+                        <button type="submit" class="btn btn-primary">Publish Now</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </section>
+  </div>
+  {% include 'admin/footer.html' %}

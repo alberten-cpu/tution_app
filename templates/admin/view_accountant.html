@@ -1,0 +1,66 @@
+{% include 'admin/header.html' %}
+    <title>Accountant</title>
+{% include 'admin/view_js_head.html' %}
+<div class="page-holder d-flex flex-wrap">
+        <div class="container-fluid">
+          <section class="py-5">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="h6 text-uppercase mb-0">Accountant | <a href="/addaccountant" style="text-decoration: none;">Add A Accountant</a></h3>
+                  </div>
+                  <div class="card-body">
+                  	<div class="table-responsive">
+                                    <table id="example" class="table table-striped table-bordered second" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <td>No</td>
+                                                <td>Photo</td>
+                                                <td>Name</td>
+                                                <td>Gender</td>
+                                                <td>Area</td>
+                                                <td>Branch</td>
+                                                <td>Salary</td>
+                                                <td>Status</td>
+                                                <td></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+  {% for row in val %}
+                                            <tr>
+             <td>{{ loop.index}}</td>
+            <td><img src="../../static/accountant_photos/{{ row['photo'] }}" style="height:100px;width:100px;"></td>
+            <td><p>{{ row['name'] }}</p></td>
+            <td><p>{{ row['gender'] }}</p></td>
+            <td><p>{{ row['area'] }}</p></td>
+            <td><p>{{ row['branch'] }}</p></td>
+            <td><p> ₹ {{ row['salary']}}/-</p></td>
+            <td>{{ row['status'] }}</td>
+            <td align="center"><br><a href="/editaccountant?lid={{ row['l_id'] }}"><button class="btn btn-info">Edit</button></a><br><br><a href="/delete_accountant?lid={{ row['l_id']}}"><button class="btn btn-danger">Delete</button></a></td>
+                                            </tr>
+{% endfor %}
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td>No</td>
+                                                <td>Photo</td>
+                                                <td>Name</td>
+                                                <td>Gender</td>
+                                                <td>Area</td>
+                                                <td>Branch</td>
+                                                <td>Salary</td>
+                                                <td>Status</td>
+                                                <td></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+{% include 'admin/view_js_foot.html' %}
+{% include 'admin/footer.html' %}

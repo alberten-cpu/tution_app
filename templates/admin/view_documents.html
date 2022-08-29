@@ -1,0 +1,57 @@
+{% include 'admin/header.html' %}
+    <title>Links</title>
+{% include 'admin/view_js_head.html' %}
+<div class="page-holder d-flex flex-wrap">
+        <div class="container-fluid">
+          <section class="py-5">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="h6 text-uppercase mb-0">Link| <a href="/addlinksAD" style="text-decoration: none;">Add New</a></h3>
+                  </div>
+                  <div class="card-body">
+                  	<div class="table-responsive">
+                                    <table id="example" class="table table-striped table-bordered second" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <td>No</td>
+                                                <td>Title</td>
+                                                <td>Links</td>
+                                                <td>Date</td>
+                                                <td>Uploaded By</td>
+                                                <td></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+  {% for row in documents %}
+                                            <tr>
+             <td>{{ loop.index}}</td>
+            <td><p>{{ row['title'] }}</p></td>
+            <td><p><a href="{{ row['documents'] }}" target="_blank">{{ row['documents'] }}</a></p></td>
+            <td><p>{{ row['date'] }}</p></td>
+            <td><p>{{ row['add_by'] }}</p></td>
+            <td align="center"><a href="/delete_links?id={{ row['id']}}"><button class="btn btn-danger">Delete</button></a></td>
+                                            </tr>
+{% endfor %}
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td>No</td>
+                                                <td>Title</td>
+                                                <td>Links</td>
+                                                <td>Date</td>
+                                                <td>Uploaded By</td>
+                                                <td></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+{% include 'admin/view_js_foot.html' %}
+{% include 'admin/footer.html' %}

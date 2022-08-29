@@ -1,0 +1,54 @@
+{% include 'admin/header.html' %}
+    <title>Statitics</title>
+{% include 'admin/view_js_head.html' %}
+<div class="page-holder d-flex flex-wrap">
+        <div class="container-fluid">
+          <section class="py-5">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="h6 text-uppercase mb-0">Statitics</h3>
+                  </div>
+                  <div class="card-body">
+                  	<div class="table-responsive">
+                                    <table id="example" class="table table-striped table-bordered second" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <td>No</td>
+                                                <td>Area</td>
+                                                <td>Branch</td>
+                                                <td>No.of students</td>
+                                                <td>No.of Trainers</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+  {% for row in statitics %}
+                                            <tr>
+             <td>{{ loop.index}}</td>
+            <td><p>{{ row['area'] }}</p></td>
+            <td><p>{{ row['branch'] }}</p></td>
+            <td><p>{{ row['students'] }}</p></td>
+            <td><p>{{ row['trainers'] }}</p></td>
+            </tr>
+{% endfor %}
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td>No</td>
+                                                <td>Area</td>
+                                                <td>Branch</td>
+                                                <td>No.of students</td>
+                                                <td>No.of Trainers</td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+{% include 'admin/view_js_foot.html' %}
+{% include 'admin/footer.html' %}

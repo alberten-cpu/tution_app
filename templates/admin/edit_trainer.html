@@ -1,0 +1,216 @@
+{% include 'admin/header.html' %}
+    <title>Trainer</title>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<div class="page-holder w-100 d-flex flex-wrap">
+        <div class="container-fluid px-xl-5">
+          <section class="py-5">
+            <div class="row">
+              <div class="col-lg-12 mb-5">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="h6 text-uppercase mb-0">Update Trainer</h3>
+                  </div>
+                  <div class="card-body">
+                    <form class="form-horizontal" action="/update_trainer/{{ data['l_id']}}" method="post" enctype="multipart/form-data">
+                      <div class="form-group row">
+                        <label class="col-md-3 form-control-label">Full Name*</label>
+                        <div class="col-md-3">
+                          <input type="text" class="form-control" name="name" id="name" required value="{{ data['name'] }}">
+                        </div>
+                        <label class="col-md-3 form-control-label">Gender*</label>
+                        <div class="col-md-3">
+                          <select name="gender" required class="form-control">
+                            {% if data['gender']=="Male" %}
+                            <option value="Male" selected>Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                            {% elif data['gender']=="Female" %}
+                            <option value="Male">Male</option>
+                            <option value="Female" selected>Female</option>
+                            <option value="Other">Other</option>
+                            {% elif data['gender']=="Other" %}
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other" selected>Other</option>
+                            {% endif %}
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-md-3 form-control-label">Syllabus*</label>
+                        <div class="col-md-3">
+                          <select name="syllabus" id="syllabus" required class="form-control">
+                            {% for row in syb %}
+                            {% if row['syllabus']==data['syllabus'] %}
+                            <option value="{{ row['syllabus'] }}" selected>{{ row['syllabus'] }}</option>
+                            {% else %}
+                            <option value="{{ row['syllabus'] }}" >{{ row['syllabus'] }}</option>
+                            {% endif %}{% endfor %}
+                          </select>
+                        </div>
+                        <label class="col-md-3 form-control-label">Preffered Standard*</label>
+                        <div class="col-md-3">
+                          <select name="standard" required class="form-control">
+                            {% for row in std %}
+                            {% if row['standard']==data['p_standard'] %}
+                            <option value="{{ row['standard'] }}" selected>{{ row['standard'] }}</option>
+                            {% else %}
+                            <option value="{{ row['standard'] }}" >{{ row['standard'] }}</option>
+                            {% endif %}{% endfor %}
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-md-3 form-control-label">Preffered Subjects*</label>
+                        <div class="col-md-3">
+                          <select required="required" name="subjects" id="subjects" class="form-control">
+                            {% for row in sub %}
+                            {% if row['subjects']==data['subjects'] %}
+                            <option value="{{ row['subjects'] }}" selected>{{ row['subjects'] }}</option>
+                            {% else %}
+                            <option value="{{ row['subjects'] }}" >{{ row['subjects'] }}</option>
+                            {% endif %}{% endfor %}
+                          </select>
+                        </div>
+                        <label class="col-md-3 form-control-label">Area Name*</label>
+                        <div class="col-md-3">
+                          <select name="area" required class="form-control">
+                            {% for row in area %}
+                            {% if row['area_name']==data['area'] %}
+                            <option value="{{ row['area_name'] }}" selected>{{ row['area_name'] }}</option>
+                            {% else %}
+                            <option value="{{ row['area_name'] }}" >{{ row['area_name'] }}</option>
+                            {% endif %}{% endfor %}
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-md-3 form-control-label">Branch Name*</label>
+                        <div class="col-md-3">
+                          <select name="branch" required class="form-control">
+                            {% for datas in res %}
+                            {% if datas['branch_name']==data['branch'] %}
+                            <option value="{{ datas['branch_name'] }}" selected>{{ datas['branch_name'] }}</option>
+                            {% else %}
+                            <option value="{{ datas['branch_name'] }}" >{{ datas['branch_name'] }}</option>
+                            {% endif %}{% endfor %}
+                          </select>
+                        </div>
+                        <label class="col-md-3 form-control-label">Join Date*</label>
+                        <div class="col-md-3">
+                         <input type="date" name="join_date" id="join_date" required class="form-control" value="{{ data['join_date'] }}">
+                        </div>
+                      </div>
+                      <div class="line"></div>
+                      <div class="form-group row">
+                        <label class="col-md-3 form-control-label">Street / Area</label>
+                        <div class="col-md-3">
+                          <input type="text" class="form-control" name="street" id="street" value="{{ data['street'] }}">
+                        </div>
+                        <label class="col-md-3 form-control-label">City / Town</label>
+                        <div class="col-md-3">
+                          <input type="text" class="form-control" name="city" id="city" value="{{ data['city'] }}">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-md-3 form-control-label">Post Office</label>
+                        <div class="col-md-3">
+                          <input type="text" class="form-control" name="po" id="po" value="{{ data['po'] }}">
+                        </div>
+                        <label class="col-md-3 form-control-label">Pincode*</label>
+                        <div class="col-md-3">
+                          <input type="text" class="form-control" name="pin" id="pin" required value="{{ data['pin'] }}">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-md-3 form-control-label">District*</label>
+                        <div class="col-md-3">
+                          <select name="dist" required class="form-control">
+                          {% for dist in district %}
+                            {% if dist['name']==data['dist'] %}
+                            <option value="{{ dist['district'] }}" selected>{{ dist['district'] }}</option>
+                            {% else %}
+                            <option value="{{ dist['district'] }}">{{ dist['district'] }}</option>
+                            {% endif %}{% endfor %}
+                        </select>
+                        </div>
+                         <label class="col-md-3 form-control-label">State*</label>
+                        <div class="col-md-3">
+                          <select name="state" required class="form-control">
+                            {% for states in state %}
+                            {% if states['name']==data['state'] %}
+                            <option value="{{ states['name'] }}" selected>{{ states['name'] }}</option>
+                            {% else %}
+                            <option value="{{ states['name'] }}" >{{ states['name'] }}</option>
+                            {% endif %}{% endfor %}
+                          </select>
+                      </div>
+                    </div>
+                      <div class="form-group row">
+                         <label class="col-md-3 form-control-label">Country*</label>
+                        <div class="col-md-3">
+                          <select name="country" method="GET" action="/" class="form-control" required>
+                            <option value=" " selected disabled>Select</option>
+                            {% for countries in country %}
+                            {% if countries['name']==data['country'] %}
+                            <option value="{{ countries['name'] }}" selected>{{ countries['name'] }}</option>
+                            {% else %}
+                            <option value="{{ countries['name'] }}" >{{ countries['name'] }}</option>
+                            {% endif %}{% endfor %}
+                         </select>
+                        </div>
+                        <label class="col-md-3 form-control-label">Address*</label>
+                        <div class="col-md-3">
+                          <textarea class="form-control" name="address" id="address" required>{{data['address']}}</textarea>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-md-3 form-control-label">Email*</label>
+                        <div class="col-md-3">
+                          <input class="form-control" type="email" name="email" id="email" required value="{{ data['email'] }}">
+                        </div>
+                        <label class="col-md-3 form-control-label">Mobile No.*</label>
+                        <div class="col-md-3">
+                          <input class="form-control" type="mobile" name="mobile" id="mobile" required value="{{ data['mobile'] }}">
+                        </div>
+                      </div>
+                      <div class="line"></div>
+                      <div class="form-group row">  
+                        <label class="col-md-3 form-control-label">Photo*</label>
+                        <div class="col-md-9">
+                          <input type="file" class="custom-file-input" accept="image/*" name="photo" id="photo">
+                        <label class="custom-file-label" for="customFile" style="border-radius: 2rem;">Upload image</label>
+                        <small class="form-text text-muted ml-3">You can upload new photo otherwise old is remain</small>
+                        </div>
+                      </div>
+                      <div class="line"></div>
+                      <div class="form-group row">
+                        <label class="col-md-3 form-control-label">Salary*</label>
+                        <div class="col-md-3">
+                          <input type="number" name="salary" id="salary" required class="form-control" value="{{ data['salary'] }}">
+                        </div>
+                        <label class="col-md-3 form-control-label">Remarks</label>
+                        <div class="col-md-3">
+                          <input type="text" class="form-control" name="remark" id="remark" value="{{ data['remark'] }}" >
+                        </div>
+                      </div>
+                      <div class="line"></div>
+                      <div class="form-group row">
+                        <div class="col-md-9 ml-auto">
+                          <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+<script type="text/javascript">
+          $(".custom-file-input").on("change", function() {
+  var fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+  });
+</script>
+{% include 'admin/footer.html' %}

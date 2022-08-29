@@ -1,0 +1,134 @@
+{% include 'branch_manager/header.html' %}
+    <title>Students</title>
+<div class="page-holder d-flex flex-wrap">
+        <div class="container-fluid">
+          <section class="py-5">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="h6 text-uppercase mb-0">Scheduling</h3>
+                  </div>
+                  <div class="card-body">
+                  	{% if ln==0 %}
+	 					<div class="table-responsive">
+							<div><h2>{{ sd['s_name'] }}</h2></div>
+							<table class="table table-bordered table-hover" id="dataTable">
+						        <tr>
+									<td></td>
+									<td>Subject</td>
+									<td>Trainer</td>	
+									<td>Days</td>
+									<td>Time</td>
+									<td></td>
+						        </tr>
+          						{% for row in schedule %}
+						        <tr>
+						        	<td>{{ loop.index }}</td>
+						        	<td>{{ row['subject'] }}</td>
+						        	<td>{{ row['name'] }}</td>
+						        	<td>{{ row['days'].replace('"',' ') }}</td>
+						        	<td>
+						        		<input type="time" name="start_time" value="{{ row['start_time'] }}"  required style="border: 0;color:black;" disabled>
+						        		To&nbsp;&nbsp;&nbsp;&nbsp;
+						        		<input type="time" name="end_time" value="{{ row['end_time'] }}"  required style="border: 0;color:black;" disabled>
+						        		<input type="hidden" name="ss_id" value="{{ row['ss_id'] }}"  required id="ss_id">
+						        	</td>
+						        	<td align="center"><button class="btn btn-danger" onclick="alert('Are you sure ?');deleteschedule()">Delete</button></a></td>
+						        </tr>
+						        {% endfor %}
+						    </table>
+						</div>
+								{% else %}
+						        <div align="center"><h2>{{ sd['s_name'] }}</h2></div>
+						        {% endif %}
+						    <h5>Add New Subject</h5>
+							<form class="form-horizontal" id="fm" method="post" enctype="multipart/form-data">
+							<input type="hidden" name="s_id" value="{{ sd['l_id'] }}" id="s_id" required>
+							<input type="hidden" name="std" value="{{ sd['s_std'] }}" id="std" required>
+							<div class="table-responsive">
+							<table class="table table-bordered table-hover" id="dataTable">
+						        <tr>
+									<td></td>
+									<td>Subject</td>
+									<td>Schedule</td>
+									<td></td>
+						        </tr>
+						        <tr>
+						            <td>1</td>
+						            <td>
+										<select class="form-control" id="subject" name="subject" required onchange="schedulename();">
+											<option value="" selected disabled>Subjects</option>
+				                            {% for row in sub %}
+				                            <option value="{{ row['subjects'] }}">{{ row['subjects'] }}</option>
+				                            {% endfor %}
+										</select>
+									</td>
+									<td>
+										<select class="form-control" id="schedule" name="schedule" required>
+											<option value="" selected disabled>Trainer,day[] at 00:00</option>
+				                            <option value="" disabled>Choose subject</option>
+										</select>
+									</td>
+									<td align="center"><input data-loading-text="Saving ..." type="submit" name="invoice_btn" value="Add " class="btn btn-primary submit_btn invoice-save-btm"></td>
+						        </tr>
+    						</table>
+    					</div>
+					</form>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+</body>
+</html>
+<script type="text/javascript">
+function schedulename()
+  {
+  	var subject=$('#subject').val();
+  	var std=$('#std').val();
+
+$.ajax({ url: "/scheduleselectBM?std="+std+"&subject="+subject,
+		 type:"POST",
+		 contentType: 'application/json;charset=UTF-8',
+            success: function(data) {
+            	$("#schedule").html(data);
+            
+        }});
+
+}
+
+function deleteschedule()
+  {
+  	var ss_id=$('#ss_id').val();
+
+$.ajax({ url: "/deletestudenscheduleBM?sid="+ss_id,
+		 type:"POST",
+		 contentType: 'application/json;charset=UTF-8',
+            success: function(data) {
+            	document.write(data);
+            
+        }});
+
+}
+
+
+</script>
+
+<script type="text/javascript">
+
+
+$('#fm').on('submit',function (e) {
+     $.ajax({
+      type: 'post',
+      url: '/student_scheduleasignBM',
+      data: $('#fm').serialize(),
+       success: function (q) {
+       	document.write(q);
+       }
+      });
+     e.preventDefault();
+     });
+
+</script>
+{% include 'branch_manager/footer.html' %}

@@ -1,0 +1,93 @@
+{% include 'area_manager/header.html' %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<title>Branch Manager</title>
+ <div class="page-holder w-100 d-flex flex-wrap">
+        <div class="container-fluid px-xl-5">
+          <section class="py-5">
+            <div class="row">
+              <div class="col-lg-8 mb-5" style="margin: auto;">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="h6 text-uppercase mb-0">Add Branch Manager</h3>
+                  </div>
+                  <div class="card-body">
+                    <form action="/addbranchmanageractionAM" method="post" enctype="multipart/form-data">
+                      <div class="form-group">
+                        <label class="form-control-label text-uppercase">Full name*</label>
+                        <input type="text" name="name" id="name" required class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label class="form-control-label text-uppercase">Gender*</label>
+                        <select name="gender" class="form-control" required>
+                            <option selected disabled value="">Select</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label class="form-control-label text-uppercase">Branch*</label>
+                        <select name="branch" method="GET" action="/" class="form-control" required>
+                            <option value="" selected disabled>Select</option>
+                            {% for datas in data %}
+                            <option value="{{datas['branch_name']}}">{{datas['branch_name']}}</option>
+                            {% endfor %}
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label class="form-control-label text-uppercase">Email*</label>
+                        <input type="text" name="mail" id="mail" required class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label class="form-control-label text-uppercase">Mobile*</label>
+                        <input type="mobile" name="phone" id="phone" required class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label class="form-control-label text-uppercase">Photo*</label>
+                          <div class="col-md-12">
+                          <input type="file" class="custom-file-input" accept="image/*" name="photo" id="photo" required="required">
+                        <label class="custom-file-label"  style="border-radius: 2rem " for="customFile">Upload image</label>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="form-control-label text-uppercase">Salary*</label>
+                        <input type="number" name="salary" id="salary" required class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label class="form-control-label text-uppercase">Password*</label>
+                        <input type="password" name="password" id="password" required  class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <label class="form-control-label text-uppercase">Retype Password*</label>
+                        <input type="password" name="repassword" id="repassword" required  class="form-control">
+                      </div>
+                      <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+          </div>
+      </section>
+  </div>
+{% include 'area_manager/footer.html' %}
+<script type="text/javascript">
+      var password = document.getElementById("password")
+  , confirm_password = document.getElementById("repassword");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords miss matched");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+
+          $(".custom-file-input").on("change", function() {
+  var fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+  });
+</script>

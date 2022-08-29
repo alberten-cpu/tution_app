@@ -1,0 +1,55 @@
+{% include 'admin/header.html' %}
+    <title>Attendance</title>
+{% include 'admin/view_js_head.html' %}
+<div class="page-holder d-flex flex-wrap">
+        <div class="container-fluid">
+          <section class="py-5">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="h6 text-uppercase mb-0">Attendance</h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="table-responsive">
+                                    <table id="example" class="table table-striped table-bordered second" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <td>No</td>
+                                                <td>Student</td>
+                                                <td>Date</td>
+                                                <td>Time</td>
+                                                <td>Attendance</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+  {% for row in atd %}
+                                            <tr>
+             <td>{{ loop.index}}</td>
+            <td>{{ row['s_name']}}</td>
+            <td>{{ row['date']}}</td>
+            <td><input type="time" value="{{ row['start_time'] }}" style="border: 0;color:black;" disabled>To&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="time" value="{{ row['end_time'] }}" style="border: 0;color:black;" disabled></td>
+            <td>{{ row['attendance']}}</td>
+        </tr>
+                                            </tr>
+{% endfor %}
+                                        </tbody>
+                                        <tfoot>
+                                            <tr><td>No</td>
+                                                <td>Student</td>
+                                                <td>Date</td>
+                                                <td>Time</td>
+                                                <td>Attendance</td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+{% include 'admin/view_js_foot.html' %}
+{% include 'admin/footer.html' %}

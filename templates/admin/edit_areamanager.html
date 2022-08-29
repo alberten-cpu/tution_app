@@ -1,0 +1,125 @@
+{% include 'admin/header.html' %}
+<title>Area Manager</title>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <div class="page-holder w-100 d-flex flex-wrap">
+        <div class="container-fluid px-xl-5">
+          <section class="py-5">
+            <div class="row">
+              <!-- Basic Form-->
+              <div class="col-lg-8 mb-5" style="margin: auto;">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="h6 text-uppercase mb-0">Update Area Manager</h3>
+                  </div>
+                  <div class="card-body">
+                    <form action="/updateareamanager/{{ val['l_id']}}" method="post" enctype="multipart/form-data">
+                      <div class="form-group">
+                        <label class="form-control-label text-uppercase">Full name*</label>
+                        <input type="text" name="name" id="name" required class="form-control" value="{{ val['name'] }}">
+                      </div>
+                      <div class="form-group">       
+                        <label class="form-control-label text-uppercase">Gender*</label>
+                        <select name="gender" class="form-control" required>
+                            {% if val['gender']=="Male" %}
+                            <option value="Male" selected>Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                            {% elif val['gender']=="Female" %}
+                            <option value="Male">Male</option>
+                            <option value="Female" selected>Female</option>
+                            <option value="Other">Other</option>
+                            {% elif val['gender']=="Other" %}
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other" selected>Other</option>
+                            {% endif %}
+                        </select>
+                      </div>
+                      <div class="form-group">       
+                        <label class="form-control-label text-uppercase">Country*</label>
+                        <select name="country" method="GET" action="/" class="form-control" required>
+                            <option value="" selected disabled>Select</option>
+                        {% for countries in country %}
+                            {% if countries['name']==val['country'] %}
+                            <option value="{{ countries['name'] }}" selected>{{ countries['name'] }}</option>
+                            {% else %}
+                            <option value="{{ countries['name'] }}" >{{ countries['name'] }}</option>
+                            {% endif %}{% endfor %}
+                        </select>
+                      </div>
+                      <div class="form-group">       
+                        <label class="form-control-label text-uppercase">State*</label>
+                        <select name="state" method="GET" action="/" class="form-control" required>
+                            <option value="" selected disabled>Select</option>
+                            {% for states in state %}
+                            {% if states['name']==val['state'] %}
+                            <option value="{{ states['name'] }}" selected>{{ states['name'] }}</option>
+                            {% else %}
+                            <option value="{{ states['name'] }}" >{{ states['name'] }}</option>
+                            {% endif %}{% endfor %}
+                         </select>
+                      </div>
+                      <div class="form-group">       
+                        <label class="form-control-label text-uppercase">District*</label>
+                        <select name="district" method="GET" action="/" class="form-control" required>
+                            <option value="" selected disabled>Select</option>
+                            {% for dist in district %}
+                            {% if dist['district']==val['district'] %}
+                            <option value="{{ dist['district'] }}" selected>{{ dist['district'] }}</option>
+                            {% else %}
+                            <option value="{{ dist['district'] }}">{{ dist['district'] }}</option>
+                            {% endif %}{% endfor %}
+                         </select>
+                      </div>
+                      <div class="form-group">
+                        <label class="form-control-label text-uppercase">Area*</label>
+                        <select name="area" method="GET" action="/" class="form-control" required>
+                            <option value="" selected disabled>Select</option>
+                            {% for row in area %}
+                            {% if row['area_name']==val['area'] %}
+                            <option value="{{ row['area_name'] }}" selected>{{ row['area_name'] }}</option>
+                            {% else %}
+                            <option value="{{ row['area_name'] }}" >{{ row['area_name'] }}</option>
+                            {% endif %}{% endfor %}
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label class="form-control-label text-uppercase">Email*</label>
+                        <input type="email" name="mail" id="mail" required class="form-control" value="{{ val['email'] }}">
+                      </div>
+                      <div class="form-group">
+                        <label class="form-control-label text-uppercase">Mobile*</label>
+                        <input type="mobile" name="phone" id="phone" required class="form-control" value="{{ val['phone'] }}">
+                      </div>
+                      <div class="form-group">
+                        <label class="form-control-label text-uppercase">Photo*</label>
+                          <div class="col-md-12">
+                          <input type="file" class="custom-file-input" accept="image/*" name="photo" id="photo">
+                        <label class="custom-file-label"  style="border-radius: 2rem " for="customFile">Upload image</label>
+                        <small class="form-text text-muted ml-3">You can upload new photo otherwise old is remain</small>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="form-control-label text-uppercase">Salary*</label>
+                        <input type="number" name="salary" id="salary" required class="form-control" value="{{ val['salary'] }}">
+                      </div>
+                      <div class="form-group">       
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <!-- Horizontal Form-->
+          </div>
+      </section>
+  </div>
+  <script type="text/javascript">
+
+  $(".custom-file-input").on("change", function() {
+  var fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+  });
+
+</script>
+{% include 'admin/footer.html' %}

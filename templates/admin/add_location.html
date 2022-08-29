@@ -1,0 +1,100 @@
+{% include 'admin/header.html' %}
+<title>Location</title>
+<div class="page-holder w-100 d-flex flex-wrap">
+        <div class="container-fluid px-xl-5">
+          <section class="py-5">
+            <div class="row">
+              <div class="col-lg-4 mb-5">
+                <div class="card">
+                  <div class="card-body" align="center">
+                    <a href="/viewcountry"><button class="btn btn-primary">Countries</button></a><br><br>
+                    <a href="/viewstate"><button class="btn btn-primary">State's</button></a><br><br>
+                    <a href="/viewdistrict"><button class="btn btn-primary">Districts</button></a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-8 mb-5">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="h6 text-uppercase mb-0">Add Country</h3>
+                  </div>
+                  <div class="card-body">
+                    <form class="form-horizontal" action="/addcountry" method="post" enctype="multipart/form-data">
+                      <div class="form-group row">
+                        <div class="col-md-6">
+                          <input type="text" class="form-control" name="country" id="country" required placeholder="Country" autocomplete="off">&nbsp;
+                        </div>
+                        <div class="col-md-6">
+                          <button type="submit" class="btn btn-primary btn-block">Add</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12 mb-5">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="h6 text-uppercase mb-0">Add State</h3>
+                  </div>
+                  <div class="card-body">
+                    <form class="form-horizontal" action="/addstate" method="post" enctype="multipart/form-data" autocomplete="off">
+                      <div class="form-group row">
+                        <div class="col-md-4">
+                          <input type="text" class="form-control" name="state" id="state" required placeholder="State">&nbsp;
+                        </div>
+                        <div class="col-md-4">
+                          <select name="country" method="GET" action="/" class="mr-3 form-control" required>
+                            <option value="" selected disabled>Country</option>
+                        {% for countries in country %}
+                            <option value="{{countries['id']}}">{{countries['name']}}</option>
+                          {% endfor %}
+                         </select>&nbsp;
+                        </div>
+                        <div class="col-md-4">
+                          <button type="submit" class="btn btn-primary btn-block">Add</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-12 mb-5">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="h6 text-uppercase mb-0">Add District</h3>
+                  </div>
+                  <div class="card-body">
+                    <form class="form-horizontal" action="/adddistrict" method="post" enctype="multipart/form-data" autocomplete="off">
+                      <div class="form-group row">
+                        <div class="col-md-3">
+                          <input type="text" class="form-control" name="district" id="district" required placeholder="District">&nbsp;
+                        </div>
+                        <div class="col-md-3">
+                          <select name="state" method="GET" action="/" class="mr-3 form-control" required>
+                        <option value="" selected disabled>State</option>
+                        {% for states in state %}
+                        <option value="{{states['id']}}">{{states['name']}}</option>
+                         {% endfor %}
+                        </select>&nbsp;
+                        </div>
+                        <div class="col-md-3">
+                          <select name="country" method="GET" action="/" class="mr-3 form-control" required>
+                            <option value="" selected disabled>Country</option>
+                        {% for countries in country %}
+                            <option value="{{countries['id']}}">{{countries['name']}}</option>
+                          {% endfor %}
+                         </select>&nbsp;
+                        </div>
+                        <div class="col-md-3">
+                          <button type="submit" class="btn btn-primary btn-block">Add</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+{% include 'admin/footer.html' %}

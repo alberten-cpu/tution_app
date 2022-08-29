@@ -1,0 +1,59 @@
+{% include 'admin/header.html' %}
+<title>Area</title>
+ <div class="page-holder w-100 d-flex flex-wrap">
+        <div class="container-fluid px-xl-5">
+          <section class="py-5">
+            <div class="row">
+            <div class="col-lg-8 mb-5" style="margin: auto;">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="h6 text-uppercase mb-0">Add Area</h3>
+                  </div>
+                  <div class="card-body">
+                    <form action="/addareaaction" method="post" enctype="multipart/form-data">
+                      <div class="form-group">
+                        <label class="form-control-label text-uppercase">Area Name*</label>
+                        <input ttype="text" name="name" id="name" required class="form-control">
+                      </div>
+                      <div class="form-group">       
+                        <label class="form-control-label text-uppercase">Country*</label>
+                        <select name="country" method="GET" action="/" class="form-control" required>
+                            <option value="" selected disabled>Select</option>
+                        {% for countries in country %}
+                            <option value="{{countries['name']}}">{{countries['name']}}</option>
+                          {% endfor %}
+                        </select>
+                      </div>
+                      <div class="form-group">       
+                        <label class="form-control-label text-uppercase">State*</label>
+                        <select name="state" method="GET" action="/" class="form-control" required>
+                            <option value="" selected disabled>Select</option>
+                        {% for states in state %}
+                        <option value="{{states['name']}}">{{states['name']}}</option>
+                         {% endfor %}
+                         </select>
+                      </div>
+                      <div class="form-group">       
+                        <label class="form-control-label text-uppercase">District*</label>
+                        <select name="district" method="GET" action="/" class="form-control" required>
+                            <option value="" selected disabled>Select</option>
+                        {% for dist in district %}
+                        <option value="{{dist['district']}}">{{dist['district']}}</option>
+                      {% endfor %}
+                         </select>
+                      </div>
+                      <div class="form-group">
+                        <label class="form-control-label text-uppercase">Address*</label>
+                        <textarea  name="address" id="address" required class="form-control" required></textarea>
+                      </div>
+                      <div class="form-group">       
+                        <button type="submit" class="btn btn-primary">Add</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+      </section>
+  </div>
+  {% include 'admin/footer.html' %}

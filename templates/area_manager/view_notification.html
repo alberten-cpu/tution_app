@@ -1,0 +1,47 @@
+{% include 'area_manager/header.html' %}
+  <title>Notifications</title>
+<div class="page-holder w-100 d-flex flex-wrap">
+        <div class="container-fluid px-xl-5">
+          <section class="py-5">
+            <div class="row">
+              <div class="col-lg-12 mb-4">
+                <div class="card">
+                  <div class="card-header">
+                    <h6 class="text-uppercase mb-0">Notifications</h6>
+                  </div>
+                  <div class="card-body">
+                      <div class="table-responsive">
+                    <table class="table card-text">
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>Notification</th>
+                          <th>From</th>
+                          <th>Date</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                  {% for noti in noti%}
+                        <tr>
+                          <th scope="row">{{ loop.index }}</th>
+                          <td>{{noti['notification']}}</td>
+                          <td>{{noti['name']}}</td>
+                          <td>{{ noti['date_time']}}</td>
+                          {% if noti['status']=='unread'  %}
+                          <td><a href="/makeasreadAM?id={{noti['n_id']}}" style="text-decoration: none;">Make as read</a></td>
+                          {% else %}
+                          <td><a href="/makeasunreadAM?id={{noti['n_id']}}" style="text-decoration: none;">Make as unread</a></td>
+                          {% endif %}
+                        </tr>
+                      {% endfor %}
+                      </tbody>
+                    </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+{% include 'area_manager/footer.html' %}
